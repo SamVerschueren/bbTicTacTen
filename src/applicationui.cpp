@@ -5,11 +5,15 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
 
+#include "ConnectionService.hpp"
+
 using namespace bb::cascades;
 
-ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
-        QObject(app)
+ApplicationUI::ApplicationUI(bb::cascades::Application *app) : QObject(app)
 {
+    ConnectionService *connection = new ConnectionService(this);
+    connection->connectToHost("192.168.0.247", 1337);
+
     // prepare the localization
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);

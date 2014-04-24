@@ -3,30 +3,37 @@ BASEDIR =  $$quote($$_PRO_FILE_PWD_)
 
 device {
     CONFIG(debug, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/applicationui.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/Services/ConnectionService.cpp) \
+                 $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/applicationui.hpp)
+        HEADERS +=  $$quote($$BASEDIR/src/Services/ConnectionService.hpp) \
+                 $$quote($$BASEDIR/src/applicationui.hpp)
     }
 
     CONFIG(release, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/applicationui.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/Services/ConnectionService.cpp) \
+                 $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/applicationui.hpp)
+        HEADERS +=  $$quote($$BASEDIR/src/Services/ConnectionService.hpp) \
+                 $$quote($$BASEDIR/src/applicationui.hpp)
     }
 }
 
 simulator {
     CONFIG(debug, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/applicationui.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/Services/ConnectionService.cpp) \
+                 $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/applicationui.hpp)
+        HEADERS +=  $$quote($$BASEDIR/src/Services/ConnectionService.hpp) \
+                 $$quote($$BASEDIR/src/applicationui.hpp)
     }
 }
 
-INCLUDEPATH +=  $$quote($$BASEDIR/src)
+INCLUDEPATH +=  $$quote($$BASEDIR/src) \
+         $$quote($$BASEDIR/src/Services)
 
 CONFIG += precompile_header
 
