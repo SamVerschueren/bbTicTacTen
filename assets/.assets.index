@@ -1,3 +1,9 @@
 1
-1
+7
+Board.qml
+images/background_mdm.jpg
+images/circlev8_mdm.png
+images/tictactoe.png
+images/tictactoe_big.png
+Login.qml
 main.qml

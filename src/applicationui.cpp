@@ -4,15 +4,30 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
+#include <bb/cascades/GroupDataModel>
 
-#include "ConnectionService.hpp"
+#include <QHostAddress>
+
+#include "TicTacService.hpp"
+
+#include "LoginViewModel.hpp"
+#include "MainViewModel.hpp"
+
+#include "ViewState.hpp"
 
 using namespace bb::cascades;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) : QObject(app)
 {
-    ConnectionService *connection = new ConnectionService(this);
-    connection->connectToHost("192.168.0.247", 1337);
+    qRegisterMetaType<GroupDataModel*>("GroupDataModel*");
+
+    qmlRegisterType<ViewState>("enums", 1, 0, "ViewState");
+
+    TicTacService *service = new TicTacService(this);
+    service->connectToHost(QHostAddress("192.168.0.247"), 1337);
+
+    LoginViewModel* loginVM = new LoginViewModel(service, this);
+    MainViewModel* mainVM = new MainViewModel(service, this);
 
     // prepare the localization
     m_pTranslator = new QTranslator(this);
@@ -28,6 +43,8 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) : QObject(app)
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
+    qml->setContextProperty("mainVM", mainVM);
+    qml->setContextProperty("loginVM", loginVM);
 
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();

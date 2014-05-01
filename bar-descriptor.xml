@@ -27,6 +27,8 @@
     <!-- A universally unique application identifier. Must be unique across all BlackBerry 10 applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
     <id>com.example.TicTacTen</id>
+    
+    <cascadesTheme>bright</cascadesTheme>
 
     <!-- The name that is displayed in the BlackBerry 10 application installer. 
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
@@ -75,14 +77,15 @@
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
    
     <initialWindow>
-        <autoOrients>true</autoOrients>
+        <aspectRatio>portrait</aspectRatio>
+        <autoOrients>false</autoOrients>
         <systemChrome>none</systemChrome>
         <transparent>false</transparent>
     </initialWindow>
     
     <!--  The icon for the application, which should be 114x114. -->
     <icon>
-        <image>icon.png</image>
+        <image>tictactoe.png</image>
     </icon>
 
     <asset path="icon.png">icon.png</asset>
@@ -92,9 +95,11 @@
     <asset path="translations" dest="qm">
         <include name="*.qm"/>
     </asset>
+    <asset path="assets/images/tictactoe.png">tictactoe.png</asset>
     
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
+    <permission>access_internet</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
 
 </qnx>
