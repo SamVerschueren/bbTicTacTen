@@ -11,7 +11,7 @@
 #include "TicTacService.hpp"
 
 TicTacService::TicTacService(QObject *parent) : QObject(parent) {
-    this->socket = new QTcpSocket();
+    this->socket = new QTcpSocket(this);
     connect(this->socket, SIGNAL(connected()), this, SLOT(onSocketConnected()));
     connect(this->socket, SIGNAL(disconnected()), this, SLOT(onSocketDisconnected()));
     connect(this->socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onSocketError(QAbstractSocket::SocketError)));
@@ -29,8 +29,6 @@ void TicTacService::connectToHost(const QHostAddress& host, int port) {
 
 void TicTacService::login(const QString& username) {
     QString data = QString("HELO %1").arg(username);
-
-    qDebug() << data;
 
     socket->write(data.toAscii());
     socket->flush();
